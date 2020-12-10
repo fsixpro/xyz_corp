@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const BASE_URL = 'http://localhost:8000/api'
+const BASE_URL = '/api'
 export default class Apicall {
   AxiosInstance() {
     const instance = Axios.create({
