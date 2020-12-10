@@ -3,12 +3,14 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Nav, Navbar, Container, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../stateManagement/actions/authAction'
+import { Redirect } from 'react-router-dom'
 const Header = ({ history }) => {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
 
   const dispatch = useDispatch()
   const logoutHandler = () => {
     dispatch(logout())
+    return <Redirect to='/' />
   }
 
   return (

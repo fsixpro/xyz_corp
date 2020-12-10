@@ -3,7 +3,7 @@ import { Button, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getChannel } from '../stateManagement/actions/channelAction'
-
+import _ from 'lodash'
 const DashboardScreen = ({ history }) => {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -15,7 +15,7 @@ const DashboardScreen = ({ history }) => {
   const subscribe = () => {
     history.push('createupdate')
   }
-  const user = useSelector(state => state.auth.user.email)
+  const user = useSelector(state => state.auth.user.email, _.isEqual())
   const channel = useSelector(state => state.channel)
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const { dog, goat, cat } = channel
