@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { createChannel } from '../stateManagement/actions/channelAction'
 
 const CreateChannelScreen = ({ history }) => {
   const channel = useSelector(state => state.channel)
   const user = useSelector(state => state.auth.user.email)
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
   const dispatch = useDispatch()
   const [update, setUpdate] = useState({
     dog: channel.dog,
@@ -18,6 +20,9 @@ const CreateChannelScreen = ({ history }) => {
     e.preventDefault()
     dispatch(createChannel(update))
     history.push('dashboard')
+  }
+  if (!isAuthenticated) {
+    history.push('/')
   }
   return (
     <Container>
