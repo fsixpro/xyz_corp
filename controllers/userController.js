@@ -47,13 +47,13 @@ export const login = async (req, res) => {
     if (!user) return util.failureResponse(res, 400, 'user does not exist')
     const matchPassword = await bcrypt.compare(password, user.password)
 
-    if (matchPassword) {
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
-      return util.successResponse(res, 200, {
-        email: user.email,
-        token,
-      })
-    }
+    if (!matchPassword)
+      return util.failureResponse(res, 400, 'password is incorrect')
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
+    return util.successResponse(res, 200, {
+      email: user.email,
+      token,
+    })
   } catch (error) {}
 }
 export const getUser = async (req, res) => {

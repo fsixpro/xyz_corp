@@ -54,7 +54,7 @@ export default class Apicall {
       const res = await this.AxiosInstance().post('/user/login', params)
       return res
     } catch (error) {
-      console.log('signin error', error)
+      console.log('signin error', error.response)
     }
   }
 

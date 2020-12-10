@@ -35,7 +35,6 @@ export const register = (email, password) => async dispatch => {
   try {
     const res = await api.register({ email, password })
     localStorage.setItem('token', res.data.data.token)
-    console.log(res)
     if (res.status === 201) {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -46,6 +45,7 @@ export const register = (email, password) => async dispatch => {
     } else {
       dispatch({
         type: REGISTER_FAIL,
+        payload: res.data.msg,
       })
     }
   } catch (errors) {
@@ -62,6 +62,7 @@ export const login = (email, password) => async dispatch => {
   try {
     const res = await api.signin({ email, password })
     localStorage.setItem('token', res.data.data.token)
+    console.log(res)
     if (res.status === 200) {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -72,6 +73,7 @@ export const login = (email, password) => async dispatch => {
     } else {
       dispatch({
         type: LOGIN_FAIL,
+        payload: res.data.msg,
       })
     }
   } catch (errors) {

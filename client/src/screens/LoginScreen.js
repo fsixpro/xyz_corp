@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../stateManagement/actions/authAction'
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState('')
@@ -17,6 +17,10 @@ const LoginScreen = ({ history }) => {
   const onSubmit = e => {
     e.preventDefault()
     dispatch(login(email, password))
+  }
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const error = useSelector(state => state.auth.error)
+  if (isAuthenticated) {
     history.push('dashboard')
   }
   return (
@@ -25,6 +29,7 @@ const LoginScreen = ({ history }) => {
       <p className='lead'>
         <i className='fas fa-user' /> Sign Into Your Account
       </p>
+      {error && <div className='alert alert-danger'>{error}</div>}
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
           <input
@@ -42,6 +47,7 @@ const LoginScreen = ({ history }) => {
             name='password'
             value={password}
             onChange={onPasswordChange}
+            min={3}
           />
         </div>
         <input type='submit' className='btn btn-primary' value='Login' />
