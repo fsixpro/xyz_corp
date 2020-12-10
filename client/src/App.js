@@ -10,6 +10,7 @@ import EditChannelScreen from './screens/EditChannelScreen'
 import { Provider } from 'react-redux'
 import store from './stateManagement/store'
 import { loadUser } from './stateManagement/actions/authAction'
+import CreateChannelScreen from './screens/CreateChannelScreen'
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser())
@@ -21,10 +22,11 @@ const App = () => {
         <main>
           <Switch>
             <Route path='/' component={Landing} exact />
-            <Route path='/register' component={RegisterScreen} />
-            <Route path='/login' component={LoginScreen} />
-            <Route path='/dashboard' component={DashboardScreen} />
-            <Route path='/editchannel' component={EditChannelScreen} />
+            <Route path='/register' component={RegisterScreen} exact />
+            <Route path='/login' component={LoginScreen} exact />
+            <Route path='/dashboard' component={DashboardScreen} exact />
+            <Route path='/editchannel' component={EditChannelScreen} exact />
+            <Route path='/createupdate' component={CreateChannelScreen} exact />
           </Switch>
         </main>
         <Footer />

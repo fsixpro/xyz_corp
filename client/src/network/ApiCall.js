@@ -85,6 +85,15 @@ export default class Apicall {
       console.log('getChannel API error', error.response)
     }
   }
+  async createChannel(param) {
+    try {
+      const res = await this.AxiosInstance1().post('/channel/', param)
+
+      return res
+    } catch (error) {
+      console.log('createChannel API error', error.response)
+    }
+  }
 
   async editChannel(param) {
     try {

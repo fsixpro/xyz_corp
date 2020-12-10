@@ -18,7 +18,18 @@ export const createChannel = async (req, res) => {
   try {
     const { dog, cat, goat } = req.body
     const channel = await Channel.findOne({ user: req.user })
-    if (channel) return util.failureResponse(res, 400, 'channel created')
+    if (channel) {
+      const newchannel = await Channel.findOneAndUpdate(
+        { user: req.user },
+        {
+          dog: dog,
+          cat: cat,
+          goat: goat,
+        },
+        { new: true, omitUndefined: true }
+      )
+      return util.successResponse(res, 200, newchannel)
+    }
     const newCh = new Channel({
       dog: dog,
       cat: cat,

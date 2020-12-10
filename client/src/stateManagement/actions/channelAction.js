@@ -21,3 +21,15 @@ export const editChannel = param => async dispatch => {
     })
   }
 }
+
+export const createChannel = param => async dispatch => {
+  const res = await api.createChannel(param)
+  console.log('🚀 ~ file: channelAction.js ~ line 27 ~ res', res)
+
+  if (res.status == 200) {
+    dispatch({
+      type: CHANNEL_SUCCESS,
+      payload: res.data.data,
+    })
+  }
+}

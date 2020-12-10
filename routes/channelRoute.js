@@ -8,6 +8,6 @@ const router = express.Router()
 import auth from '../middleware/auth.js'
 
 router.get('/get', auth, getChannel)
-router.post('/get', auth, createChannel)
+router.post('/', auth, createChannel)
 router.put('/edit', auth, editChannel)
 export default router
